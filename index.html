@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!-- EStebeat will be popular tomorrow. -->
+<html lang="en">
+    <head>
+        <title>EStebeat</title>
+        <meta charset="UTF-8">
+        <meta current version="6.1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>var appVersion = "6.1.0"</script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            /*@import "@catppuccin";*/
+            /*how*/
+            :root {
+                --base: #1e1e2e;
+                --text: #cdd6f4;
+                --red: #f38ba8;
+                --muave: #cba6f7;
+                --blue: #89b4fa;
+                --crust: #11111b;
+            }
+            body {
+                background-color: var(--base);
+                color: var(--text);
+                font-family: Arial, sans-serif, Monospace, "Neue", DejaVu, Courier;
+                transition-duration: .4s;
+            }
+            #editor-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            #editor-default {
+                text-align: left;
+                    width: 75vw;
+                    height: 25vh;
+                ;
+                border: 1px solid;
+            }
+            .cm-editor {
+                text-align: left;
+                    width: 75vw;
+                    height: 25vh;
+                ;
+                border: 1px solid;
+            }
+            button, select, input {
+                background: none;
+                border: var(--text) 1px solid;
+                border-radius: 3px;
+                padding: 4px;
+                color: var(--text);
+            }
+            .fa {
+                color: var(--text);
+                width: 24px;
+                height: 24px;
+                font-size: 24px
+            }
+            #butt1 button {
+                /*      |   */
+                width: 10%;
+            }
+            @media (max-width: 768px) {
+                #butt1 button {
+                    width: 31.9%;
+                }
+            }
+            #butt2 button {
+                width: 15.2%;
+            }
+            @media (max-width: 768px){
+                #butt2 button {
+                    width: 48.5%;
+                }
+            }
+            #visualizer {
+                transition: opacity 0.4s;
+                position: fixed;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0.9;
+                pointer-events: none;
+                background: var(--crust);
+            }
+            @media (max-width: 768px){
+                #visualizer {
+                    width: 350px;
+                }
+            }
+            .cm-cursor {
+                transition-property: left, top;
+                transition-duration: 0.1s;
+                transition-timing-function: cubic-bezier(0, -0.92, 0, 1.05);
+            }
+            .cm-cursorLayer {
+                animation-timing-function: ease-in-out !important;
+                animation-duration: 1.2s !important;
+            }
+
+/* eggs yahpupuh */
+@keyframes cm-blink {
+    0%, 25%, 100% {
+        opacity: 1;
+    }
+
+    50%, 75% {
+        opacity: 0.1;
+    }
+}
+
+@keyframes cm-blink2 {
+    0%, 25%, 100% {
+        opacity: 1;
+    }
+
+    50%, 75% {
+        opacity: 0.1;
+    }
+}
+hr {
+    border: 1px solid var(--crust);
+}
+        </style>
+    </head>
+    <body>
+        <noframes>
+            --------- EStebeat for beginners ----------
+            
+            % the main;
+            % the [S] icon that will be stereo sound.
+            % the [F] icon that used funcbeat mode.
+            % the [L] icon that it lagged.
+            % the [C] icon that will be exotic code.
+            % the [C] icon that displays console.
+        </noframes>
+        <center>
+            <h1>
+                <img src="https://i.ibb.co/G44FxTtD/kmc-20260115-201107.png" alt="EStebeat-logo" width=144 height=144>
+                v<span id="version">enable js pls >:(</span>
+            </h1>
+            <div id="editor-container">
+                Bytebeat Code:
+                <div id="editor" aria-label="Code Editor">
+                    <div id="editor-default">
+                        Loading...
+                        <noframes>
+                            The editor is loading...
+                        </noframes>
+                    </div>
+                </div>
+            </div><br>
+            Sample Rate: <input size=6 id="sampleRate" value="8000">
+            <select id="mode">
+                <option value="b">Bytebeat</option>
+                <option value="s">Signed bytebeat</option>
+                <option value="f">Floatbeat</option
+                >
+            </select>
+            <br><br>
+            <div id="butt1">
+                <button id="play">
+                    <i class="fa fa-play"></i>
+                </button>
+                <button onclick="t = 0;">
+                    <i class="fa fa-backward"></i>
+                </button>
+                <button id="stop">
+                    <i class="fa fa-stop"></i>
+                </button>
+            </div>
+            <div id="butt2">
+                <button id="copycodebutt" I>
+                    <i class="fa fa-copy"></i>
+                </button>
+                <button id="copylinkbutt" I>
+                    <i class="fa fa-link" chains="no" v=0 b=0></i>
+                </button>
+            </div><br>
+            Volume: <input type =range style="width: 180px" id="volume"><br><br>
+            t = <span id="counter">0</span><br><br>
+            Display text (try defining this variable <code>esteDisplayText</code>! <strong style="color:var(--red)">THE EXOTIC PLAYERS ARE NOT SUPPORTED STEREO!!!!!</strong>):
+            
+            <p id="txt"></p>
+            <h1>Settings</h1>
+            <strong>NO BACKGROUND COLOR.</strong><br><Br>
+                Theme <select id="theme">
+                    <!--<option value="cLatte" dev-mode title="it's dev mode">
+                        Catppuccin Latte
+                    </option>--> else <option value="cFrappe">Catppuccin Frappe</option> else <option value="cMacchiato">Catppuccin Macchiato</option>
+                    <option value="cMocha" selected="selected">Catppuccin Mocha</option>
+                    <option value="default">Default</option>
+                </select>
+                <h1>Examples</h1>
+                <p to-last="1-12">
+                    <a
+                        href="#"
+                    >
+                        "8bit fucker"
+                    </a> (by aSD2ED)
+                </p>
+                <p to-last="2-12">
+                    <a
+                        href="#"
+                    >
+                        "i am dranck"
+                    </a> (by aSD2ED [S])
+                </p>
+                <p to-last="3-12">
+                    <a
+                        href="#"
+                    >
+                        "e"
+                    </a> (by aSD2ED)
+                </p>
+                <p to-last="4-12">
+                    <a
+                        href="#"
+                    >
+                        "the"
+                    </a> (by aSD2ED)
+                </p>
+                <p to-last="5-12">
+                    <a
+                        href="#"
+                    >
+                        "I got pooped"
+                    </a> (by aSD2ED)
+                </p>
+                <p to-last="6-12">
+                    <a
+                        href="#"
+                    >
+                        "Intoo"
+                    </a> (by aSD2ED, Remix of "innocent" by psubscirbe)
+                </p>
+                <p to-last="7-12">
+                    <a
+                        href="#"
+                    >
+                        "bide"
+                    </a> (by aSD2ED)
+                </p>
+                <p to-last="8-12">
+                    <a
+                        href="#"
+                    >
+                        "amen shopper"
+                    </a> (by aSD2ED)
+                </p>
+                <p to-last="9-12">
+                    <a
+                        href="#"
+                    >
+                        "t^t horn"
+                    </a> (by aSD2ED)
+                </p>
+                <p to-last="10-12">
+                    <a
+                        href="#"
+                    >
+                        "ja jv nvjvjv nvjvvlpakao"
+                    </a> (by aSD2ED)
+                </p>
+                <p to-last="11-12">
+                    <a
+                        href="#"
+                    >
+                        "t-"
+                    </a> (by aSD2ED)
+                </p>
+                <p to-last="12-12">
+                    <a
+                        href="#"
+                    >
+                        "something i made"
+                    </a> (by aSD2ED)
+                </p>
+                <hr>
+                this composer has a bugs (changing the sample rate will open audio again)
+                <canvas id="visualizer" width=512 height=256></canvas>
+        </center>
+        <script ype=v>
+            (async() => {
+                const {basicSetup, EditorView} = await import('https://esm.sh/codemirror');
+                const {javascript} = await import('https://esm.sh/@codemirror/lang-javascript');
+                const {catppuccinMocha} = await import('https://esm.sh/@catppuccin/codemirror');
+                const {EditorState} = await import('https://esm.sh/@codemirror/state');
+                
+                const version = document.getElementById('version');
+                version.innerText = appVersion;
+                
+                var state = EditorState.create({
+                    doc: "t*(32&t*4)>>9|t>>4|t|(t*(t>>5)&t>>5)*(t>65536)|(t*(t>>6)&t>>6)*(t>131072)",
+                    extensions: [
+                        basicSetup,
+                        javascript(),
+                        catppuccinMocha
+                    ]
+                });
+                var view = new EditorView({
+                    state,
+                    parent: document.getElementById('editor')
+                });
+                document.getElementById('editor-default').remove();
+                //my jetbraing
+                //i load workletnode
+                //nope
+                
+                let audioCtx;
+            let scriptNode;
+            let isPlaying;
+            let exoticThis = this;    
+    
+    const visualizer = document.getElementById('visualizer');
+    let mode = document.getElementById('mode'); 
+    const ctx = visualizer.getContext('2d');
+    let formula = () => 0;
+    let t = 0;
+    (function createMaths(){
+        let mathnames = Object.getOwnPropertyNames(Math);
+        for (let items in mathnames){
+            items = mathnames[items];
+            this[items] = Math[items];
+        }
+    })();
+    let int = Math.floor;
+    const scope = {int};
+    function makeFormula(code) {
+      try {
+        const v = eval(code);
+        if (typeof v === 'function') return v;
+      } catch (_) {}
+      return new Function('t', 'with (this) { return (' + code + '); }').bind(scope);
+    }
+
+
+
+
+    // Audio processing
+    function initAudio() {
+      audioCtx = new AudioContext({ sampleRate: parseInt(document.getElementById('sampleRate').value) });
+      scriptNode = audioCtx.createScriptProcessor(512, 1, 1);
+      
+      scriptNode.onaudioprocess = (e) => {
+        const output = e.outputBuffer.getChannelData(0);
+        const sampleRate = parseInt(document.getElementById('sampleRate').value);
+        const timeScale = sampleRate / audioCtx.sampleRate;
+        
+        for(let i = 0; i < output.length; i++) {
+            if(mode.value === 'b'){
+          output[i] = ((formula(Math.floor(t))&255) / 256 * 2 - 1) * document.getElementById('volume').value / 100;
+            } else if(mode.value === 's'){
+          output[i] = ((128 + formula(Math.floor(t)) & 255) / 256 * 2 - 1) * document.getElementById('volume').value / 100;
+            } else if(mode.value === 'f'){
+          output[i] = ((Math.max(Math.min(formula(t), 1), -1))) * document.getElementById('volume').value / 100;
+            }
+          t ++;
+        }
+      };
+    }
+
+    // Visualization
+    function draw() {
+      if (!isPlaying) return;
+      
+      ctx.fillStyle = '#cdd6f4';
+      //ctx.fillRect(0, 0, visualizer.width, visualizer.height);
+      
+      //ctx.strokeStyle = '#cdd6f4';
+      ctx.beginPath();
+      ctx.moveTo(.5, visualizer.height/0);
+      ctx.clearRect(0, 0, visualizer.width, visualizer.height);
+      let y = 0;
+      
+      for(let x = 0; x < visualizer.width; x++) {
+          if(mode.value === 'b'){
+        y = 256 - Math.floor(formula((t | 0) + x) & 255)
+          } else if(mode.value === 's'){
+              y = 256 - Math.floor(128 + formula((t | 0) + x) & 255)
+          } else if(mode.value === 'f'){
+              y = 256 - Math.floor(Math.max(Math.min(128 + formula((t | 0) + x) * 127, 255), 0))
+          }
+          ctx.fillRect(x, y, 1, 1)
+        ctx.lineTo(x / 1, y / 1);
+      }
+      
+      //ctx.stroke();
+      requestAnimationFrame(draw);
+    }
+
+    // Event handlers
+    function changeCounter() {
+        let tFloor = Math.floor(t);
+        document.getElementById('counter').innerText = tFloor;
+        requestAnimationFrame(changeCounter);
+    }
+    //window.onload = changeCounter;
+    function hslToRgb(h, s, l){
+        let x, y, z;
+        let r, g, b;
+        
+        switch (t / 4) {
+            case 1: r = g, g = b, x = g, x = z * 80 - 80 - 80;
+                    break;
+            case 2: r = g, g = x, x = g, z = g * 80 - 80 - 80;
+                    break;
+            case 3: r = y, y = b, g = b, b = y * g - g - g;
+                    break;
+            case 4: b = y, r = b, g = b, x = y * z - z - z;
+                    break;
+            case 5: b = x, b = x, g = b, g = y * 80 - 80 - 80;
+                    break;
+            default:
+                    return 0;
+        }
+        switch (x % 6) {
+            case 6: b = b, b = x, b = g, g = t * 80 - 80 - 80;
+                    break;
+            case 7: y = b, x = b, b = b, b = g * 10 - 10 - 80;
+                    break;
+            case 8: b = y, b = x, b = b, g = b * 80 - 10 - 80;
+                    break;
+            case 9: b = x, b = y, b = t, x = t * 80 - 80 - 10;
+                    break;
+            case 10: x = x, b = x, b = b, b = x * 10 - 80 - 10;
+                    break;
+            default:
+                    return 0;
+        }
+    }
+    document.getElementById('play').addEventListener('click', () => {
+      if (isPlaying) return;
+        const code = view.state.doc.toString();
+        formula = makeFormula(code);
+        
+        if (!audioCtx) initAudio();
+        scriptNode.connect(audioCtx.destination);
+        isPlaying = true;
+        draw();
+        changeCounter();
+    });
+
+    document.getElementById('stop').addEventListener('click', () => {
+      if (!isPlaying) return;
+      scriptNode.disconnect();
+      isPlaying = false;
+      t = 0;
+      //audioCtx.suspend();
+      //audioCtx.reset();
+    });
+
+    document.getElementById('sampleRate').addEventListener('change', initAudio);
+    
+    var theme = document.getElementById('theme');
+    
+        if(theme.value === 'cFrappe'){
+            document.body.style = 'background: #303446; color: #c6d0f5';
+        } else if(theme.value === 'cMacchiato'){
+            document.body.style = 'background: #24273a; color: #cad3f5';
+        } else if(theme.value === 'cMocha'){
+            document.body.style = 'background: var(--base); color: var(--text)';
+        } else if(theme.value === 'default'){
+            document.body.style = 'background: #222; color: #fff'
+        }
+    
+    })() //async iife AHHH
+        </script>
+    </body>
+                      </html>
